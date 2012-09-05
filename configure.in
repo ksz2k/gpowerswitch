@@ -1,0 +1,47 @@
+dnl Process this file with autoconf to produce a configure script.
+
+AC_INIT(configure.in)
+AM_INIT_AUTOMAKE(gPowerSwitch, 0.3.0)
+AM_CONFIG_HEADER(config.h)
+dnl AM_MAINTAINER_MODE
+
+AC_ISC_POSIX
+AC_PROG_CC
+AM_PROG_CC_STDC
+AC_HEADER_STDC
+
+pkg_modules="gtk+-2.0 >= 2.6.0 libusb libglade-2.0"
+PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
+AC_SUBST(PACKAGE_CFLAGS)
+AC_SUBST(PACKAGE_LIBS)
+
+GLADE_FILE=gPowerSwitch.glade
+AC_SUBST(GLADE_FILE)
+AC_DEFINE_UNQUOTED(GLADE_FILE, "$GLADE_FILE", [Default Glade file])
+
+COMMENTS="Gtk 2.0 based frontend for OBDEV's PowerSwitch"
+AC_SUBST(COMMENTS)
+AC_DEFINE_UNQUOTED(COMMENTS, "$COMMENTS", [Program info])
+
+COPYING="Copyright (C) 2006, 2007 - Krzysiek Szczuka <kszczuka@gmail.com>"
+AC_SUBST(COPYING)
+AC_DEFINE_UNQUOTED(COPYING, "$COPYING", [Copyright info])
+
+LOGO="avrusb.png"
+AC_SUBST(LOGO)
+AC_DEFINE_UNQUOTED(LOGO, "$LOGO", [Program's logo filename])
+
+
+USBDEV_NAME=kszPowerSwitch
+AC_SUBST(USBDEV_NAME)
+AC_DEFINE_UNQUOTED(USBDEV_NAME, "$USBDEV_NAME", [Device name on USB bus])
+
+USBDEV_VENDOR_NAME="Krzysiek Sz."
+AC_SUBST(USBDEV_VENDOR_NAME)
+AC_DEFINE_UNQUOTED(USBDEV_VENDOR_NAME, "$USBDEV_VENDOR_NAME", 
+	[Device Vendor's name on USB bus])
+
+AC_OUTPUT([
+Makefile
+])
+
